@@ -1,7 +1,31 @@
 (* Problem 1 *)
+Print["Problem 1"]
+f[x_] := Sin[Pi*x];
+P1[x_] := ((Sin[
+       Pi]*(x - 1.25)*(x - 1.6))/((1 - 1.25)*(1 - 1.6))) + ((Sin[
+       1.25 * Pi] * (x - 1)*(x - 1.6)) / ((1.25 - 1)*(1.25 - 
+        1.6))) + ((Sin[
+       1.6*Pi]*(x - 1)*(x - 1.25))/((1.6 - 1)*(1.6 - 1.25)))
+Print["Absolute Error: ",  P1[1.4] - f[1.4]]
+(*Bounded Error Calculation*)
+f'''[x];
+(*1 is contained on interval so max f''' is at x = 1*)
+
+ErrorTerm[x_] := (x - 1)*(x - 1.25)*(x - 1.6);
+FindRoot[ErrorTerm'[x], {x, 1.1}];
+Print["Bounded Error on Interval [1, 1.6]: ", 
+ f'''[1]*ErrorTerm[1.10933] / 6]
+Plot[{f[x], P1[x]}, {x, 1, 2}]
+
 
 
 (* Problem 2 *)
+Print["\n\nProblem 2"]
+DivDif[x_] := -0.62049958 + 3.365129*(x - 0.1) - 
+  2.2962635*(x - 0.1)*(x - 0.2) - 
+  0.473151667*(x - 0.1)*(x - 0.2)*(x - 0.3)
+Print["Using Divided Differed the value of f(0.25) is ", DivDif[0.25]]
+
 
 
 (* Problem 3 *)
