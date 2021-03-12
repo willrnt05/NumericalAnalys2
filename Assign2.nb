@@ -28,7 +28,63 @@ Print["Using Divided Differed the value of f(0.25) is ", DivDif[0.25]]
 
 
 
-(* Problem 3 *)
+(*Problem 3*)
+Print["\nProblem 3"]
+data = {{0, 1.0}, {0.15, 1.004}, {0.31, 1.031}, {0.5, 1.117}, {0.6, 
+    1.223}, {0.75, 1.422}};
+
+f[x_] = Fit[data, {1, x}, x]; (* First Degree *)
+g[x_] = Fit[data, {1, x, x^2}, x];(* Second Degree *)
+h[x_] = Fit[data, {1, x, x^2, x^3}, x]; (* Third Degree *)
+
+Print["\n\nFirst Degree Poly: ", f[x]]
+Print["Second Degree Poly: ", g[x]]
+Print["Third Degree Poly: ", h[x]]
+
+
+(* Graphs of each polynomial *)
+Show[ListPlot[data], Plot[f[x], {x, 0, 1}]]
+Show[ListPlot[data], Plot[g[x], {x, 0, 1}]]
+Show[ListPlot[data], Plot[h[x], {x, 0, 1}]]
+
+
+mean = Sum[data[[n]][[2]], {n, 1, Length[data]}]/Length[data];
+
+Print["\n\nMean: ", mean]
+
+SSres1 = Sum[(data[[n]][[2]] - f[data[[n]][[1]]])^2, {n, 1, 
+    Length[data]}] ;
+SSreg1 = Sum[(f[data[[n]][[1]]] - mean)^2, {n, 1, Length[data]}];
+SStot1 = SSres1 + SSreg1;
+Rsquared1 = SSreg1/SStot1;
+
+Print["\n\nFirst Degree Residual: ", SSres1]
+Print["First Degree Regression: ", SSreg1]
+Print["First Degree Total: ", SStot1]
+Print["First Degree Coefficients of Det: ", Rsquared1]
+
+
+SSres2 = Sum[(data[[n]][[2]] - g[data[[n]][[1]]])^2, {n, 1, 
+    Length[data]}] ;
+SSreg2 = Sum[(g[data[[n]][[1]]] - mean)^2, {n, 1, Length[data]}];
+SStot2 = SSres2 + SSreg2;
+Rsquared2 = SSreg2/SStot2;
+
+Print["\n\nSecond Degree Residual: ", SSres2]
+Print["Second Degree Regression: ", SSreg2]
+Print["Second Degree Total: ", SStot2]
+Print["Second Degree Coefficients of Det: ", Rsquared2]
+
+SSres3 = Sum[(data[[n]][[2]] - h[data[[n]][[1]]])^2, {n, 1, 
+    Length[data]}] ;
+SSreg3 = Sum[(h[data[[n]][[1]]] - mean)^2, {n, 1, Length[data]}];
+SStot3 = SSres3 + SSreg3;
+Rsquared3 = SSreg3/SStot3;
+
+Print["\n\nThird Degree Residual: ", SSres3]
+Print["Third Degree Regression: ", SSreg3]
+Print["Third Degree Total: ", SStot3]
+Print["Third Degree Coefficients of Det: ", Rsquared3]
 
 
 (* Problem 4 *)
